@@ -1,13 +1,125 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #22254b;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.anime-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #373969;
+    padding: 0.5rem;
+}
+
+.search {
+    background-color: transparent;
+    color: white;
+    font-family: inherit;
+    font-size: 1.1rem;
+    border: 2px solid #22254b;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    margin-right: 50px;
+}
+
+.search:focus {
+    outline: none;
+}
+.anime {
+    background-color: #373969;
+    width: 250px;
+    margin: 1rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.anime img {
+    object-fit: cover;
+    width: 100%;
+    height: 80%;
+}
+
+.anime-info {
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.anime-info h3 {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.anime-eps {
+    display: flex;
+    align-items: center;
+}
+
+.anime-eps h2 {
+    margin: 0;
+    margin-right: 1rem;
+}
+
+.anime-overview {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+
+.anime-over {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    color: #22254b;
+    position: absolute;
+    overflow: auto;
+    max-height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-101%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.anime:hover .anime-over {
+    transform: translateY(0%);
+}
+
+.tag {
+    background-color: #22254b;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.tag.green {
+    color: green;
+}
+.tag.orange {
+    color: orange;
+}
+.tag.red {
+    color: red;
 }

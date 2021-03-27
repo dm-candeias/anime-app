@@ -1,33 +1,53 @@
-import logo from "./logo.svg";
-import "./App.css";
-import axios from "axios";
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import Anime from './components/Anime';
 
-const hitBackend = () => {
-  axios.get("/test").then((response) => {
-    console.log(response.data);
-  });
-};
+const TOP_ANIMES_API = '/top/anime';
+const SERACH_API = '/search/anime?q=';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={hitBackend}>Send request</button>
-      </header>
-    </div>
-  );
+    const [animes, setAnimes] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    useEffect(() => {
+        axios.get(TOP_ANIMES_API).then((response) => {
+            setAnimes(response.data.top);
+        });
+    }, []);
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        if (setSearchTerm) {
+            axios.get(SERACH_API + searchTerm).then((response) => {
+                setAnimes(response.data.results);
+                console.log(response.data.results);
+            });
+            setSearchTerm('');
+        }
+    };
+    const handleOnChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    return (
+        <>
+            <header>
+                <form onSubmit={handleOnSubmit}>
+                    <input
+                        className="search"
+                        type="text"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={handleOnChange}
+                    />
+                </form>
+            </header>
+            <div className="anime-container">
+                {animes.map((anime) => (
+                    <Anime key={anime.mal_id} {...anime} />
+                ))}
+            </div>
+        </>
+    );
 }
 
 export default App;
